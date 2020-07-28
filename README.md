@@ -1,6 +1,6 @@
 # OCFR Calls
 
-Converts Orange County Fire Rescue calls from their website into JSON
+Converts Orange County Fire Rescue (Florida) call data into JSON
 
 ## Requirements
 
@@ -18,11 +18,10 @@ yarn install
 ## Usage
 
 ```
-node index.js
+node teshandler.js
 ```
 
 JSON representation is printed to console
 
 
-## Future
-More features coming
+Can be deployed into a cloud worker with minimal effort
