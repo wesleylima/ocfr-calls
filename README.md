@@ -24,4 +24,31 @@ node teshandler.js
 JSON representation is printed to console
 
 
-Can be deployed into a cloud worker with minimal effort
+## Cloudflare Workers
+Install and configure wrangler for your Cloudlare account https://developers.cloudflare.com/workers/tooling/wrangler/install/
+
+Create a wrangler.toml with the appropriate account_id
+
+```
+# wrangler.toml
+
+# The name of your Workers application
+name = "ocfr-calls"
+
+# Your Cloudflare account ID
+account_id = "yourAccountId"
+
+# The kind of application you're deploying to Cloudflare
+type = "webpack"
+
+# Publish to workers.dev by default
+workers_dev = true
+```
+
+Then...
+
+```
+wrangler publish
+```
+
+Visit your worker's url and get your JSON!
