@@ -27,17 +27,20 @@ const JsonFormatter = {
 
 const handler = async (event) => {
   const url = 'https://web.pulsepoint.org/DB/giba.php?agency_id=65060';
-  return fetch(url).then(async function(response) {
+  return fetch(url, { cf: { cacheEverything: true } }).then(async function(response) {
     if (response.ok) {
       let json = await response.json();
       var decrypted = CryptoJS.AES.decrypt(JSON.stringify(json), secret, {
         format: JsonFormatter
       }).toString(CryptoJS.enc.Utf8);
 
-      const body = JSON.parse(JSON.parse(decrypted));
+      const body = JSON.parse(decrypted);
       return {
       'statusCode': 200,
-        'headers': {'Content-Type': 'application/json'},
+        'headers': {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin' : '*',
+        },
         'body': body,
       }
     }

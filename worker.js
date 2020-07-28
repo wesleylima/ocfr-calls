@@ -10,5 +10,10 @@ addEventListener('fetch', event => {
  */
 async function handleRequest(request) {
   const response = await handler();
-  return new Response(JSON.stringify(response), {status: 200});
+  return new Response(response.body,
+    {
+      status: response.status,
+      headers: response.headers,
+    }
+  );
 }
