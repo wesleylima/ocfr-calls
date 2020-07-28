@@ -1,5 +1,4 @@
 const CryptoJS = require('crypto-js');
-const axios = require('axios');
 
 const secret = "tombrady5rings";
 
@@ -26,20 +25,23 @@ const JsonFormatter = {
   }
 };
 
-
 const handler = async (event) => {
   const url = 'https://web.pulsepoint.org/DB/giba.php?agency_id=65060';
-  return axios.get(url).then(function(response) {
-    var decrypted = CryptoJS.AES.decrypt(JSON.stringify(response.data), secret, {
-      format: JsonFormatter
-    }).toString(CryptoJS.enc.Utf8);
+  return fetch(url).then(async function(response) {
+    if (response.ok) {
+      let json = await response.json();
+      var decrypted = CryptoJS.AES.decrypt(JSON.stringify(json), secret, {
+        format: JsonFormatter
+      }).toString(CryptoJS.enc.Utf8);
 
-    const body = JSON.parse(JSON.parse(decrypted));
-    return {
-    'statusCode': 200,
-      'headers': {'Content-Type': 'application/json'},
-      'body': body,
+      const body = JSON.parse(JSON.parse(decrypted));
+      return {
+      'statusCode': 200,
+        'headers': {'Content-Type': 'application/json'},
+        'body': body,
+      }
     }
+
   });
 };
 

@@ -1,6 +1,11 @@
 {
+  "name": "ocfr-calls",
+  "version": "1.0.0",
+  "description": "json feed of Orange County Fire Rescue",
+  "main": "worker.js",
   "dependencies": {
-    "axios": "^0.18.0",
-    "crypto-js": "^3.2.0",
-  }
+    "crypto-js": "^3.2.0"
+  },
+  "author": "Wesley Lima <wesley@wesleylima.com>",
+  "license": "AGPL-3.0-only"
 }
